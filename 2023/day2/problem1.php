@@ -23,22 +23,25 @@ function driver($inputFilePath)
         $isInvalidGame = false;
         [$gameNumberPart, $gamePart] = explode(':', $row);
         $gameNumber = explode(' ', $gameNumberPart)[1];
-
         $games = explode(';', $gamePart);
+
         foreach ($games as $game) {
             $rounds = explode(',', trim($game));
+
             foreach ($rounds as $round) {
                 [$count, $colour] = explode(' ', trim($round));
+
                 if ($count > $availableBallMap[$colour]) {
                     $isInvalidGame = true;
                     break;
                 }
             }
         }
+
         if (!$isInvalidGame) {
             $sumOfPossibleGameIds += $gameNumber;
-            // print($gameNumber . "\n");
         }
     }
+
     print($sumOfPossibleGameIds);
 }
